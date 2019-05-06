@@ -24,7 +24,7 @@
 
     <test-fixture id="ChangedPropertyTestFixture">
       <template>
-        <chuck-norris prop1="new-prop1"></chuck-norris>
+        <chuck-norris joke="Test joke"></chuck-norris>
       </template>
     </test-fixture>
 
@@ -33,19 +33,19 @@
 
         test('instantiating the element with default properties works', () => {
           const element = fixture('BasicTestFixture');
-          assert.equal(element.prop1, 'chuck-norris');
+          assert.equal(element.joke, 'Waiting for Chuck to say something funny...');
           const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello chuck-norris!');
+          const elementHeader = elementShadowRoot.querySelector('div');
+          assert.equal(elementHeader.innerHTML, 'Waiting for Chuck to say something funny...');
         });
 
         test('setting a property on the element works', () => {
           // Create a test fixture
           const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.prop1, 'new-prop1');
+          assert.equal(element.joke, 'Test joke');
           const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('h2');
-          assert.equal(elementHeader.innerHTML, 'Hello new-prop1!');
+          const elementHeader = elementShadowRoot.querySelector('div');
+          assert.equal(elementHeader.innerHTML, 'Test joke');
         });
 
       });
