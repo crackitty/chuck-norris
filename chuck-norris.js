@@ -20,7 +20,7 @@ class ChuckNorris extends PolymerElement {
 
   static get properties() {
     return {
-      joke: {
+      joke: { 
         type: String,
         value: 'Waiting for Chuck to say something funny...', 
       },
