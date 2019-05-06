@@ -22,7 +22,7 @@ class ChuckNorris extends PolymerElement {
     return {
       joke: { 
         type: String,
-        value: 'Waiting for Chuck to say something funny...', 
+        value: 'Waiting for Chuck to say something funny...',
       },
     };
   }
