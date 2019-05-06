@@ -1,9 +1,22 @@
 {
   "name": "chuck-norris",
+  "version": "1.0.0",
   "description": "An element that shows random chuck norris jokes",
+  "author": "Charlie Roche",
   "main": "chuck-norris.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crackitty/chuck-norris.git"
+  },
   "dependencies": {
     "@polymer/polymer": "^3.0.0"
+  },
+  "scripts": {
+    "start": "polymer serve",
+    "build": "polymer build",
+    "lint": "polymer lint",
+    "test": "polymer test",
+    "test:integration": "polymer build # test that psk builds without error with the CLI"
   },
   "devDependencies": {
     "@polymer/iron-demo-helpers": "^3.0.0-pre.19",
