@@ -9,13 +9,14 @@ addons:
     packages:
     - google-chrome-stable
 before_script:
-- npm install polymer-cli
-- npm install web-component-tester
-- npm install
-- export PATH=$PWD/node_modules/.bin:$PATH
+  - npm install polymer-cli
+  - npm install web-component-tester
+  - npm install 
+  - export PATH=$PWD/node_modules/.bin:$PATH
 script:
-- xvfb-run polymer test --skip-plugin sauce
-- if [ "${TRAVIS_PULL_REQUEST}" = "true" ]; then polymer test --skip-plugin local; fi
+  - echo ${TRAVIS_PULL_REQUEST} 
+  - xvfb-run polymer test --skip-plugin sauce
+  - if [ "${TRAVIS_PULL_REQUEST}" = "true" ]; then polymer test --skip-plugin local; fi
 env:
   global:
   - secure: ntn/RIESpRBqNhX8mqCXXEY4KMyKKyFW5qeFvwnQ2Rv5qYV1ryK65RYMANQQRR3K68pm7FIXBc16sgDxDa/8RewYAb/3fN4gh74hpRcFYFNn7sY1U/YL3X9vIeVBpzI+/kYed7YjZEcg/yPeYrI0EIzzSn2ih4dXBZjlJLSSXkwpyXh2vyDkRbGveNo7gznuXNCQvqAFO2dHoooQ+U+hPWHOks0f+NgPrrl4Q4nb95xji9HHzk+0DZ0XUnAbNvFV59gRsUv5VuK6S+LMNZ6BnHzAX9zV2JtemWuNJWNIeDMta/B+nmt6zHfdZYD8+nkmriLBj6RIf8WrPwNiROs5wiJ3KC+zV1GpePS7skyVKw1M7crxHyH5FywQTm0/WhpI+iRvqVFKmi3wfFa2/Yd4deBN5VHBVkT6/aLioG9Kz6yOxvQY/6d9IQ35pxY+KBDRMCaaabuz2L40q6ovJVtPfEWAqRDr6ysGQIHSZiqCnDdPgQlRvzouRpm4NV6rB7DWjRd6imQYoKClinD1nInMdgLv4a2Lug+tVTSGRjPDDNB/npB59/ijlGH2qECrsMuHREXhNVqgF5qlmzVT+aYeuHBmQ6gM58EvLxvRKcFTHmlYKfXIqFYd/tC0VE0ZhIe6QWNqyJnSy/+L6HUmqNVkXWNE24Rt1WoA7sjNs9qTJSo=
