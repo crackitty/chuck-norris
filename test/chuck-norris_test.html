@@ -22,9 +22,9 @@
       </template>
     </test-fixture>
 
-    <test-fixture id="ChangedPropertyTestFixture">
+    <test-fixture id="AutoLoadingTestFixture">
       <template>
-        <chuck-norris joke="Test joke"></chuck-norris>
+        <chuck-norris auto></chuck-norris>
       </template>
     </test-fixture>
 
@@ -33,19 +33,66 @@
 
         test('instantiating the element with default properties works', () => {
           const element = fixture('BasicTestFixture');
-          assert.equal(element.joke, 'Waiting for Chuck to say something funny...');
+          assert.deepEqual(element.joke, {id: -1, icon_url: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png', value: 'Waiting for Chuck...'});
+
           const elementShadowRoot = element.shadowRoot;
-          const elementHeader = elementShadowRoot.querySelector('div');
-          assert.equal(elementHeader.innerHTML, 'Waiting for Chuck to say something funny...');
+          const elementHeader = elementShadowRoot.querySelector('.joke');
+          assert.equal(elementHeader.innerHTML, 'Waiting for Chuck...');
         });
 
         test('setting a property on the element works', () => {
           // Create a test fixture
-          const element = fixture('ChangedPropertyTestFixture');
-          assert.equal(element.joke, 'Test joke');
+          const element = fixture('BasicTestFixture');
+          element.joke = {id: 12861827, icon_url: 'https://assets.chucknorris.host/img/avatar/chuck-norris.png', value: 'Test joke'};
+
+          const elementShadowRoot = element.shadowRoot;
+          const elementHeader = elementShadowRoot.querySelector('.joke');
+          assert.equal(elementHeader.innerHTML, 'Test joke');
+        });
+
+        /**
+         * Test to check that after the 
+         */
+         test('normal request to joke api works', async () => {
+          // Create a test fixture
+          const element = fixture('BasicTestFixture');
+          await element.randomChuckJoke();
+
+          const elementShadowRoot = element.shadowRoot;
+          const elementHeader = elementShadowRoot.querySelector('.joke');
+
+          // Check if the JSON coming back from the service is the correct structure
+          expect(element.joke).to.have.property('category');
+          expect(element.joke).to.have.property('icon_url');
+          expect(element.joke).to.have.property('id');
+          expect(element.joke).to.have.property('url');
+          expect(element.joke).to.have.property('value');
+          
+          assert.notEqual(elementHeader.innerHTML, 'Test joke', 'We should have gotten a new joke from Chuck by now');
+        });
+
+        /**
+         * Test to check that after the 
+         */
+         test('setting auto attribute loads joke', async () => {
+          // Create a test fixture
+          const element = fixture('AutoLoadingTestFixture');
+
           const elementShadowRoot = element.shadowRoot;
           const elementHeader = elementShadowRoot.querySelector('div');
-          assert.equal(elementHeader.innerHTML, 'Test joke');
+
+          // Wait until the 
+          setTimeout(() => {
+            expect(element.joke).to.have.property('category');
+            expect(element.joke).to.have.property('icon_url');
+            expect(element.joke).to.have.property('id');
+            expect(element.joke).to.have.property('url');
+            expect(element.joke).to.have.property('value');
+            
+            // Check if the JSON coming back from the service is the correct structure
+            assert.notEqual(elementHeader.innerHTML, 'Test joke', 'We should have gotten a new joke from Chuck by now');
+
+          }, 2000);
         });
 
       });
